@@ -80,7 +80,7 @@ const CreateQuiz = (props: Props) => {
       mcqQuestions: mcqList,
       trueFalseQuestions: trueFalseList,
     };
-    dispatch(addQuizInfo([quizData]));
+    dispatch(addQuizInfo(quizData));
     setSaved(true);
   };
 

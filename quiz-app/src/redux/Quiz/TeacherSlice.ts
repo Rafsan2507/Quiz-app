@@ -26,7 +26,7 @@ export interface QuizForm {
     name: "quiz",
     initialState,
     reducers: {
-      addQuizInfo: (state, action: PayloadAction<QuizForm[]>) => {
+      addQuizInfo: (state, action: PayloadAction<QuizForm>) => {
         return { ...state, ...action.payload };
       },
     },
