@@ -3,25 +3,33 @@ import { Box, Button, Flex, Spacer } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import CreateQuiz from "./CreateQuiz";
+import ShowQuizForm from "./ShowQuizForm";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import PublishedForm from "./PublishedForm";
 type Props = {};
 
 const Teacher = (props: Props) => {
   const [create, setCreate] = useState<boolean>(false);
+  const published = useSelector((state: RootState) => state.publishInfo);
   const handleClick = () => {
     setCreate(true);
   };
+
   return (
     <Box>
-      <Box px={"5vw"} py={"4vh"}>
+      <Box px={"10vw"} py={"4vh"}>
         <Flex>
           <Box
             textColor={"#7468d4"}
             fontWeight={"bold"}
             fontSize={"1.5rem"}
             px={"4"}
-            borderWidth={"4px"}
-            borderRadius={"4vh"}
+            py={"4"}
+            borderWidth={"2px"}
+            borderTopRadius={"1vh"}
             borderColor={"#7468d4"}
+            bg={"#f4c8bd"}
           >
             Teacher
           </Box>
@@ -40,7 +48,14 @@ const Teacher = (props: Props) => {
           </Box>
         </Flex>
       </Box>
-      <Box>{create && <CreateQuiz />}</Box>
+      {published.published ? (
+        <Box>
+          <PublishedForm />
+        </Box>
+      ) :
+      <Box>{create && <CreateQuiz />}</Box> 
+      }
+      
     </Box>
   );
 };

@@ -1,26 +1,23 @@
-import { AppDispatch, RootState } from "@/redux/store";
-import { Box, Button, Center, Flex, Grid, Radio, Spacer } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Grid,
+  Radio,
+  Spacer,
+} from "@chakra-ui/react";
+import React from "react";
+import { useSelector } from "react-redux";
 import { MdOutlineAccessTime } from "react-icons/md";
-import { Published, publishInfo } from "@/redux/Quiz/PublishedSlice";
 
 type Props = {};
 
-const ShowQuizForm = (props: Props) => {
+const PublishedForm = (props: Props) => {
   const quiz = useSelector((state: RootState) => state.addQuizInfo);
-  const [published,setPublish] = useState<boolean>(false);
-  const dispatch = useDispatch<AppDispatch>();
   const mcq = quiz.mcqQuestions;
   const trueFalse = quiz.trueFalseQuestions;
-
-  const handlePublish = () => {
-    setPublish(true);
-    const publish : Published = {
-      published
-    };
-    dispatch(publishInfo(publish));
-  }
   return (
     <Box mx={"10vw"} bg={"#f8f0ff"}>
       <Box py={"8"} fontSize={"xl"} fontWeight={"bold"}>
@@ -73,13 +70,12 @@ const ShowQuizForm = (props: Props) => {
           borderRadius={"full"}
           textColor={"white"}
           _hover={{ bg: "#7468d4", color: "white" }}
-          onClick={handlePublish}
         >
-          Publish
+          Activate
         </Button>
       </Flex>
     </Box>
   );
 };
 
-export default ShowQuizForm;
+export default PublishedForm;
