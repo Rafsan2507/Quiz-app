@@ -1,4 +1,4 @@
-import { RootState } from "@/redux/store";
+import { AppDispatch, RootState } from "@/redux/store";
 import {
   Box,
   Button,
@@ -8,25 +8,105 @@ import {
   Radio,
   Spacer,
 } from "@chakra-ui/react";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineAccessTime } from "react-icons/md";
+import { Activated, activateInfo } from "@/redux/Quiz/ActivateSlice";
+import { formatDuration, intervalToDuration, addSeconds } from "date-fns";
 
 type Props = {};
 
 const PublishedForm = (props: Props) => {
+  const dispatch = useDispatch<AppDispatch>();
   const quiz = useSelector((state: RootState) => state.addQuizInfo);
+  const activate = useSelector((state: RootState) => state.activateInfo);
   const mcq = quiz.mcqQuestions;
   const trueFalse = quiz.trueFalseQuestions;
+  const [remainingTime, setRemainingTime] = useState<number | null>(null);
+
+  const handleActivate = () => {
+    const activated: Activated = {
+      activate: "activated",
+    };
+    dispatch(activateInfo(activated));
+    setRemainingTime(quiz.duration * 60);
+  };
+  const handleDeactivate = () => {
+    const activated: Activated = {
+      activate: "deactivated",
+    };
+    dispatch(activateInfo(activated));
+    setRemainingTime(quiz.duration * 60);
+  };
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+
+    if (
+      activate.activate === "activated" &&
+      remainingTime !== null &&
+      remainingTime > 0
+    ) {
+      timer = setInterval(() => {
+        setRemainingTime((prevTime) => (prevTime !== null ? prevTime - 1 : 0));
+      }, 1000);
+    } else if (remainingTime === 0) {
+      const activated: Activated = {
+        activate: "deactivated",
+      };
+      dispatch(activateInfo(activated));
+    }
+
+    return () => clearInterval(timer);
+  }, [activate, remainingTime]);
+
+  const formattedTime =
+    remainingTime !== null
+      ? formatDuration(
+          intervalToDuration({ start: 0, end: remainingTime * 1000 })
+        )
+      : "";
+
   return (
     <Box mx={"10vw"} bg={"#f8f0ff"}>
       <Box py={"8"} fontSize={"xl"} fontWeight={"bold"}>
-        <Flex justifyContent={"center"}>
-          <Box>Title: {quiz.title}</Box>
+        <Flex>
+          <Box pl={"35vw"}>Title: {quiz.title}</Box>
+          <Spacer/>
+        {activate.activate === "deactivated" ? (
+          <Button
+          mr={"2"}
+            w={"10vw"}
+            bg={"#7468d4"}
+            borderRadius={"full"}
+            textColor={"white"}
+            _hover={{ bg: "#7468d4", color: "white" }}
+            onClick={handleActivate}
+          >
+            Activate
+          </Button>
+        ) : (
+          <Button
+            mr={"2"}
+            w={"10vw"}
+            bg={"#7468d4"}
+            borderRadius={"full"}
+            textColor={"white"}
+            _hover={{ bg: "#7468d4", color: "white" }}
+            onClick={handleDeactivate}
+          >
+            Deactivate
+          </Button>
+        )}
         </Flex>
-        <Flex justifyContent={"end"} pr={"16"}>
+        
+        <Flex justifyContent={"end"} pr={"16"} pt={"4"}>
           <Box display={"flex"} alignItems={"center"}>
-            <MdOutlineAccessTime size={"3vh"} /> : {quiz.duration} min
+            <MdOutlineAccessTime size={"3vh"} />
+            {activate.activate === "activated" && remainingTime !== null ? (
+              <>: {formattedTime}</>
+            ) : (
+              <>: {quiz.duration} min</>
+            )}
           </Box>
         </Flex>
       </Box>
@@ -39,7 +119,7 @@ const PublishedForm = (props: Props) => {
             <Box fontSize={"md"} fontWeight={"semibold"}>
               <Grid templateColumns="repeat(2, 1fr)" gap={4}>
                 {m.options.map((option, optionIndex) => (
-                  <Radio>
+                  <Radio key={optionIndex}>
                     {optionIndex + 1}. {option}
                   </Radio>
                 ))}
@@ -55,25 +135,13 @@ const PublishedForm = (props: Props) => {
             <Box fontSize={"md"} fontWeight={"semibold"}>
               <Grid templateColumns="repeat(2, 1fr)" gap={4}>
                 {tf.answer.map((ans, ansIndex) => (
-                  <Radio>{ans}</Radio>
+                  <Radio key={ansIndex}>{ans}</Radio>
                 ))}
               </Grid>
             </Box>
           </Box>
         ))}
       </Box>
-      <Flex justifyContent={"end"}>
-        <Button
-          mt={"4"}
-          w={"10vw"}
-          bg={"#7468d4"}
-          borderRadius={"full"}
-          textColor={"white"}
-          _hover={{ bg: "#7468d4", color: "white" }}
-        >
-          Activate
-        </Button>
-      </Flex>
     </Box>
   );
 };

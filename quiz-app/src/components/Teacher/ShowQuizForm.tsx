@@ -9,15 +9,13 @@ type Props = {};
 
 const ShowQuizForm = (props: Props) => {
   const quiz = useSelector((state: RootState) => state.addQuizInfo);
-  const [published,setPublish] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const mcq = quiz.mcqQuestions;
   const trueFalse = quiz.trueFalseQuestions;
 
   const handlePublish = () => {
-    setPublish(true);
     const publish : Published = {
-      published
+      published:true
     };
     dispatch(publishInfo(publish));
   }
