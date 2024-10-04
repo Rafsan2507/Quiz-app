@@ -21,26 +21,25 @@ const Teacher = (props: Props) => {
       <Box px={"10vw"} py={"4vh"}>
         <Flex>
           <Box
-            textColor={"#7468d4"}
+            textColor={"#0fffbe"}
             fontWeight={"bold"}
             fontSize={"1.5rem"}
             px={"4"}
             py={"4"}
             borderWidth={"2px"}
             borderTopRadius={"1vh"}
-            borderColor={"#7468d4"}
-            bg={"#f4c8bd"}
+            bg={"#106fbe"}
           >
             Teacher
           </Box>
           <Spacer />
           <Box>
             <Button
-              bg={"#7468d4"}
+              bg={"#106fbe"}
               gap={"2"}
               textColor={"white"}
               fontWeight={"semibold"}
-              _hover={{ bg: "#7468d4", color: "white" }}
+              _hover={{ bg: "#106fbe", color: "white" }}
               onClick={handleClick}
             >
               Create New Quiz <FaPlus />

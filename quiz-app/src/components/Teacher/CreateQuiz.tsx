@@ -105,28 +105,28 @@ const CreateQuiz = (props: Props) => {
               borderColor={"gray.400"}
               _hover={{ borderColor: "gray.400" }}
               value={duration}
-              onChange={(e) => setDuration(Number(e.target.value))}
+              onChange={(e) => setDuration(parseInt(e.target.value))}
             />
           </FormControl>
         </HStack>
 
         <HStack spacing={"20px"} my={"5"}>
           <Button
-            bg={"#7468d4"}
+            bg={"#106fbe"}
             gap={"2"}
             textColor={"white"}
             fontWeight={"semibold"}
-            _hover={{ bg: "#7468d4", color: "white" }}
+            _hover={{ bg: "#106fbe", color: "white" }}
             onClick={handleAddMcqQuestion}
           >
             Add MCQ
           </Button>
           <Button
-            bg={"#7468d4"}
+            bg={"#106fbe"}
             gap={"2"}
             textColor={"white"}
             fontWeight={"semibold"}
-            _hover={{ bg: "#7468d4", color: "white" }}
+            _hover={{ bg: "#106fbe", color: "white" }}
             onClick={handleAddTrueFalseQuestion}
           >
             Add True/False
@@ -164,21 +164,21 @@ const CreateQuiz = (props: Props) => {
             </FormControl>
             <HStack spacing={"20px"} my={"5"}>
               <Button
-                bg={"#7468d4"}
+                bg={"#106fbe"}
                 gap={"2"}
                 textColor={"white"}
                 fontWeight={"semibold"}
-                _hover={{ bg: "#7468d4", color: "white" }}
+                _hover={{ bg: "#106fbe", color: "white" }}
                 onClick={handleAddMcqQuestion}
               >
                 Add MCQ
               </Button>
               <Button
-                bg={"#7468d4"}
+                bg={"#106fbe"}
                 gap={"2"}
                 textColor={"white"}
                 fontWeight={"semibold"}
-                _hover={{ bg: "#7468d4", color: "white" }}
+                _hover={{ bg: "#106fbe", color: "white" }}
                 onClick={handleAddTrueFalseQuestion}
               >
                 Add True/False
@@ -226,21 +226,21 @@ const CreateQuiz = (props: Props) => {
             </FormControl>
             <HStack spacing={"20px"} my={"5"}>
               <Button
-                bg={"#7468d4"}
+                bg={"#106fbe"}
                 gap={"2"}
                 textColor={"white"}
                 fontWeight={"semibold"}
-                _hover={{ bg: "#7468d4", color: "white" }}
+                _hover={{ bg: "#106fbe", color: "white" }}
                 onClick={handleAddMcqQuestion}
               >
                 Add MCQ
               </Button>
               <Button
-                bg={"#7468d4"}
+                bg={"#106fbe"}
                 gap={"2"}
                 textColor={"white"}
                 fontWeight={"semibold"}
-                _hover={{ bg: "#7468d4", color: "white" }}
+                _hover={{ bg: "#106fbe", color: "white" }}
                 onClick={handleAddTrueFalseQuestion}
               >
                 Add True/False
@@ -252,11 +252,11 @@ const CreateQuiz = (props: Props) => {
           <Button
             mt={"4"}
             w={"10vw"}
-            bg={"#7468d4"}
+            bg={"#106fbe"}
             borderRadius={"full"}
             textColor={"white"}
             onClick={handleSubmit}
-            _hover={{ bg: "#7468d4", color: "white" }}
+            _hover={{ bg: "#106fbe", color: "white" }}
           >
             Preview
           </Button>

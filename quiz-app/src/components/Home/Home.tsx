@@ -1,11 +1,42 @@
 "use client";
-import { Box, Button, Flex, Spacer } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Spacer } from "@chakra-ui/react";
 import React from "react";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 type Props = {};
 
 const Home = (props: Props) => {
   const router = useRouter();
+  const activate = useSelector((state: RootState) => state.activateInfo);
+  const students = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+  ];
   const handleClickTeacher = () => {
     router.push("/teacher");
   };
@@ -20,45 +51,56 @@ const Home = (props: Props) => {
           py={"4"}
           px={"12"}
           borderRadius={"2vh"}
-          bg={"#7468d4"}
-          fontSize={"2rem"}
-          textColor={"white"}
+          bg={"#106fbe"}
+          fontSize={"1.5rem"}
+          textColor={"#0fffbe"}
+          fontWeight={"bold"}
         >
           Quiz App
         </Box>
       </Flex>
-
-      <Box mt={"25vh"} px={"35vw"}>
-        <Flex>
+      <Flex justifyContent={"center"}>
+        <Box mt={"20vh"}>
           <Button
-            p={"8"}
-            w={"10vw"}
+            py={"8"}
+            px={"12"}
             borderWidth={"4px"}
             borderRadius={"4vh"}
-            borderColor={"#bba0d5"}
+            borderColor={"#106fbe"}
             fontSize={"1.5rem"}
-            textColor={"#bba0d5"}
-            _hover={{ bg: "#bba0d5", color: "white" }}
+            textColor={"#106fbe"}
+            _hover={{ bg: "#106fbe", color: "#0fffbe" }}
             onClick={handleClickTeacher}
           >
             Teacher
           </Button>
-          <Spacer />
+        </Box>
+      </Flex>
+
+      <Grid
+        templateColumns="repeat(auto-fill, minmax(150px, 1fr))"
+        gap={8}
+        mt={"8vh"}
+        px={"12"}
+      >
+        {students.map((student, index) => (
           <Button
-            p={"8"}
-            w={"10vw"}
+            isDisabled={activate.activate !== "activated"}
+            key={index}
+            py={"8"}
+            px={"12"}
             borderWidth={"4px"}
             borderRadius={"4vh"}
-            borderColor={"#f4c8bd"}
+            borderColor={"#2BB673"}
             fontSize={"1.5rem"}
-            textColor={"#f4c8bd"}
-            _hover={{ bg: "#f4c8bd", color: "white" }}
+            textColor={"#2BB673"}
+            _hover={{ bg: "#2BB673", color: "white" }}
             onClick={handleClickStudent}
           >
-            Student
+            Student {students[index]}
           </Button>
-        </Flex>
-      </Box>
+        ))}
+      </Grid>
     </Box>
   );
 };

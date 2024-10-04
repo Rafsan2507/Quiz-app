@@ -1,5 +1,5 @@
 import { AppDispatch, RootState } from "@/redux/store";
-import { Box, Button, Center, Flex, Grid, Radio, Spacer } from "@chakra-ui/react";
+import { Box, Button, Center, Checkbox, Flex, Grid, Radio, Spacer } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineAccessTime } from "react-icons/md";
@@ -20,7 +20,7 @@ const ShowQuizForm = (props: Props) => {
     dispatch(publishInfo(publish));
   }
   return (
-    <Box mx={"10vw"} bg={"#f8f0ff"}>
+    <Box mx={"10vw"} bg={"#f8f0ff"} mt={"10"}>
       <Box py={"8"} fontSize={"xl"} fontWeight={"bold"}>
         <Flex justifyContent={"center"}>
           <Box>Title: {quiz.title}</Box>
@@ -40,9 +40,9 @@ const ShowQuizForm = (props: Props) => {
             <Box fontSize={"md"} fontWeight={"semibold"}>
               <Grid templateColumns="repeat(2, 1fr)" gap={4}>
                 {m.options.map((option, optionIndex) => (
-                  <Radio>
+                  <Checkbox>
                     {optionIndex + 1}. {option}
-                  </Radio>
+                  </Checkbox>
                 ))}
               </Grid>
             </Box>
@@ -56,7 +56,7 @@ const ShowQuizForm = (props: Props) => {
             <Box fontSize={"md"} fontWeight={"semibold"}>
               <Grid templateColumns="repeat(2, 1fr)" gap={4}>
                 {tf.answer.map((ans, ansIndex) => (
-                  <Radio>{ans}</Radio>
+                  <Checkbox key={ansIndex}>{ans}</Checkbox>
                 ))}
               </Grid>
             </Box>
@@ -65,12 +65,14 @@ const ShowQuizForm = (props: Props) => {
       </Box>
       <Flex justifyContent={"end"}>
         <Button
+        mr={"6"}
           mt={"4"}
+          mb={"6"}
           w={"10vw"}
-          bg={"#7468d4"}
+          bg={"#106fbe"}
           borderRadius={"full"}
           textColor={"white"}
-          _hover={{ bg: "#7468d4", color: "white" }}
+          _hover={{ bg: "#106fbe", color: "white" }}
           onClick={handlePublish}
         >
           Publish

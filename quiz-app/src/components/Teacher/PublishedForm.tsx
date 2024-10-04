@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Center,
+  Checkbox,
   Flex,
   Grid,
   Radio,
@@ -71,34 +72,34 @@ const PublishedForm = (props: Props) => {
       <Box py={"8"} fontSize={"xl"} fontWeight={"bold"}>
         <Flex>
           <Box pl={"35vw"}>Title: {quiz.title}</Box>
-          <Spacer/>
-        {activate.activate === "deactivated" ? (
-          <Button
-          mr={"2"}
-            w={"10vw"}
-            bg={"#7468d4"}
-            borderRadius={"full"}
-            textColor={"white"}
-            _hover={{ bg: "#7468d4", color: "white" }}
-            onClick={handleActivate}
-          >
-            Activate
-          </Button>
-        ) : (
-          <Button
-            mr={"2"}
-            w={"10vw"}
-            bg={"#7468d4"}
-            borderRadius={"full"}
-            textColor={"white"}
-            _hover={{ bg: "#7468d4", color: "white" }}
-            onClick={handleDeactivate}
-          >
-            Deactivate
-          </Button>
-        )}
+          <Spacer />
+          {activate.activate === "deactivated" ? (
+            <Button
+              mr={"2"}
+              w={"10vw"}
+              bg={"#106fbe"}
+              borderRadius={"full"}
+              textColor={"white"}
+              _hover={{ bg: "#106fbe", color: "white" }}
+              onClick={handleActivate}
+            >
+              Activate
+            </Button>
+          ) : (
+            <Button
+              mr={"2"}
+              w={"10vw"}
+              bg={"#106fbe"}
+              borderRadius={"full"}
+              textColor={"white"}
+              _hover={{ bg: "#106fbe", color: "white" }}
+              onClick={handleDeactivate}
+            >
+              Deactivate
+            </Button>
+          )}
         </Flex>
-        
+
         <Flex justifyContent={"end"} pr={"16"} pt={"4"}>
           <Box display={"flex"} alignItems={"center"}>
             <MdOutlineAccessTime size={"3vh"} />
@@ -119,9 +120,9 @@ const PublishedForm = (props: Props) => {
             <Box fontSize={"md"} fontWeight={"semibold"}>
               <Grid templateColumns="repeat(2, 1fr)" gap={4}>
                 {m.options.map((option, optionIndex) => (
-                  <Radio key={optionIndex}>
+                  <Checkbox key={optionIndex}>
                     {optionIndex + 1}. {option}
-                  </Radio>
+                  </Checkbox>
                 ))}
               </Grid>
             </Box>
@@ -135,7 +136,7 @@ const PublishedForm = (props: Props) => {
             <Box fontSize={"md"} fontWeight={"semibold"}>
               <Grid templateColumns="repeat(2, 1fr)" gap={4}>
                 {tf.answer.map((ans, ansIndex) => (
-                  <Radio key={ansIndex}>{ans}</Radio>
+                  <Checkbox key={ansIndex}>{ans}</Checkbox>
                 ))}
               </Grid>
             </Box>
