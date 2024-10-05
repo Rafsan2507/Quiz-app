@@ -105,7 +105,7 @@ const CreateQuiz = (props: Props) => {
               borderColor={"gray.400"}
               _hover={{ borderColor: "gray.400" }}
               value={duration}
-              onChange={(e) => setDuration(Number(e.target.value))}
+              onChange={(e) => setDuration(parseInt(e.target.value))}
             />
           </FormControl>
         </HStack>
